@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Menu, X, BookOpen, Headphones, Home, Library } from "lucide-react";
+import { Search, Menu, X, BookOpen, Headphones, Home, Library, User, LogIn } from "lucide-react";
 
 const navItems = [
   { name: "Accueil", path: "/", icon: Home },
@@ -15,6 +16,7 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const location = useLocation();
+  const { user, loading } = useAuth();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -51,8 +53,8 @@ export function Header() {
             })}
           </nav>
 
-          {/* Search Bar */}
-          <div className="hidden lg:flex items-center gap-2 flex-1 max-w-md mx-8">
+          {/* Search Bar & Auth */}
+          <div className="hidden lg:flex items-center gap-4 flex-1 max-w-lg mx-8">
             <div className="relative w-full">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
@@ -63,6 +65,27 @@ export function Header() {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
+          </div>
+
+          {/* Auth Buttons */}
+          <div className="hidden md:flex items-center gap-2">
+            {!loading && (
+              user ? (
+                <Link to="/profil">
+                  <Button variant="secondary" className="gap-2">
+                    <User className="h-4 w-4" />
+                    Mon Profil
+                  </Button>
+                </Link>
+              ) : (
+                <Link to="/auth">
+                  <Button variant="default" className="gap-2">
+                    <LogIn className="h-4 w-4" />
+                    Connexion
+                  </Button>
+                </Link>
+              )
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -104,6 +127,25 @@ export function Header() {
                   </Link>
                 );
               })}
+              
+              {/* Mobile Auth */}
+              {!loading && (
+                user ? (
+                  <Link to="/profil" onClick={() => setIsMenuOpen(false)}>
+                    <Button variant="secondary" className="w-full justify-start gap-2">
+                      <User className="h-4 w-4" />
+                      Mon Profil
+                    </Button>
+                  </Link>
+                ) : (
+                  <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
+                    <Button variant="default" className="w-full justify-start gap-2">
+                      <LogIn className="h-4 w-4" />
+                      Connexion
+                    </Button>
+                  </Link>
+                )
+              )}
             </nav>
           </div>
         )}
