@@ -10,6 +10,7 @@ import PodcastsPage from "./pages/PodcastsPage";
 import CataloguePage from "./pages/CataloguePage";
 import AuthPage from "./pages/AuthPage";
 import ProfilePage from "./pages/ProfilePage";
+import FictionSonorePage from "./pages/FictionSonorePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
             <Route path="/livres" element={<BooksPage />} />
             <Route path="/podcasts" element={<PodcastsPage />} />
             <Route path="/catalogue" element={<CataloguePage />} />
+            <Route path="/fictions-sonores" element={<FictionSonorePage />} />
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/profil" element={<ProfilePage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

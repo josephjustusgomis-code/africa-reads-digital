@@ -3,12 +3,13 @@ import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Menu, X, BookOpen, Headphones, Home, Library, User, LogIn } from "lucide-react";
+import { Search, Menu, X, BookOpen, Headphones, Home, Library, User, LogIn, Mic } from "lucide-react";
 
 const navItems = [
   { name: "Accueil", path: "/", icon: Home },
   { name: "Livres", path: "/livres", icon: BookOpen },
   { name: "Podcasts", path: "/podcasts", icon: Headphones },
+  { name: "Fictions Sonores", path: "/fictions-sonores", icon: Mic },
   { name: "Catalogue", path: "/catalogue", icon: Library },
 ];
 
